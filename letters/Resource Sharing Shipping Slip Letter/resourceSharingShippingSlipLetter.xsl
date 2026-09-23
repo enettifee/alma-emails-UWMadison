@@ -49,7 +49,11 @@
 			<xsl:when test="starts-with(/notification_data/incoming_request/additional_borrower_information, 'Univ') and contains(/notification_data/incoming_request/additional_borrower_information, 'Wisc')">UW_POD</xsl:when>
 			<xsl:when test="starts-with(/notification_data/incoming_request/pod_id, '537922422830000041')">SWITCH</xsl:when>
 	        <xsl:when test="starts-with(/notification_data/incoming_request/external_request_id, '01SLCO')">SWITCH</xsl:when>
+			<xsl:when test="starts-with(/notification_data/incoming_request/external_request_id, '01SLCOSHSFDS')">SWITCH</xsl:when>
+			<xsl:when test="starts-with(/notification_data/incoming_request/external_request_id, '01MARQUETTE')">SWITCH</xsl:when>
 			<xsl:when test="starts-with(/notification_data/partner_code, '01SLCO')">SWITCH</xsl:when>
+			<xsl:when test="starts-with(/notification_data/partner_code, '01MARQUETTE')">SWITCH</xsl:when>
+			<xsl:when test="starts-with(/notification_data/partner_code, 'A-G:STWI:XA34')">MINITEX</xsl:when>
 			<xsl:when test="starts-with(/notification_data/partner_code, 'A-G:STWI')">WI_PUBLIC</xsl:when>
 			<xsl:when test="contains(/notification_data/incoming_request/pod_id, '381639321420000041')">MINITEX</xsl:when>
 			<xsl:when test="contains(notification_data/incoming_request/note, 'Personal Delivery')">PERSONAL_DELIVERY</xsl:when>
@@ -393,17 +397,17 @@
 									    <xsl:call-template name="header_redbox">
 											<xsl:with-param name="lib">
 							                  <xsl:variable name="partner" select="/notification_data/partner_name"/>
-											    <xsl:choose>
-											        <xsl:when test="contains($partner, '- Concordia University Library')">SWITCH - Concordia Univ</xsl:when>
-							                        <xsl:when test="contains($partner, '- CUW Library')">SWITCH - Concordia Univ</xsl:when>
+											  <xsl:choose>
+											        <xsl:when test="contains($partner, 'Concordia University Library')">SWITCH - Concordia University</xsl:when>
+							                        <xsl:when test="contains($partner, '- CUW Library')">SWITCH - Concordia University</xsl:when>
                                                     <xsl:when test="contains($partner, '- Wisconsin Lutheran College')">SWITCH - Wisconsin Lutheran College</xsl:when>
 							                        <xsl:when test="contains($partner, '- Mount Mary University')">SWITCH - Mount Mary University</xsl:when>
 							                        <xsl:when test="contains($partner, '- Saint Francis de Sales Seminary')">SWITCH - Saint Francis de Sales Seminary</xsl:when>
-							                        <xsl:when test="contains($partner, 'School of Theology')">SWITCH - Sacred Heart Seminary and School of Theology</xsl:when>
+							                        <xsl:when test="contains($partner, '- Sacred Heart Seminary and School of Theology')">SWITCH - Sacred Heart Seminary and School of Theology</xsl:when>
                                                     <xsl:when test="contains($partner, '- Alverno College Library')">SWITCH - Alverno College Library</xsl:when>
 							                        <xsl:when test="contains($partner, '- MIAD Library')">SWITCH - MIAD Library</xsl:when>
-							                        <xsl:when test="contains($partner, 'Marquette')">Marquette Univ - Raynor Library</xsl:when>
-							 
+							                        <xsl:when test="contains($partner, 'Marquette')">Marquette University - Raynor Library</xsl:when>
+							                        <xsl:when test="contains($partner, '01MARQUETTE')">Marquette University - Raynor Library</xsl:when>
                                                     <xsl:otherwise>
                                                      <!-- Then show the destination library name as before -->
                                                       <xsl:call-template name="libLookup">
@@ -414,7 +418,7 @@
 											    </xsl:with-param>
 									    	</xsl:call-template>
 									</xsl:when>
-
+											
 											<!-- ========================================================================== -->
 											<!--   Wisconsin Public Libraries                                               -->
 											<!-- ========================================================================== -->
@@ -434,7 +438,7 @@
 												<xsl:for-each select="notification_data/partner_shipping_info_list/partner_shipping_info">
 												<tr>
 													<td style="text-align: left; font-size: 20px; font-weight: bold; padding-top: 6px;">
-													<h2 style="margin: 0; font-size: 20px; font-weight: bold;">
+													<h2 style="margin: 0; font-size: 22px; font-weight: bold;">
 														<xsl:value-of select="address2"/>
 													</h2>
 													</td>
@@ -487,6 +491,7 @@
 															<xsl:when test="contains(notification_data/partner_name, 'Shaughnessy-Frey Library')">MNT</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'Bethel')">MNK</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'Hamline')">MHA</xsl:when>
+															<xsl:when test="contains(notification_data/partner_name, 'Cloud State')">MST</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'Bridge')">MNO</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'MORRIS Briggs')">MNX</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'DULUTH Martin')">MND</xsl:when>
@@ -494,6 +499,7 @@
 														    <xsl:when test="contains(notification_data/partner_name, 'TC Law')">MLL</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'University of Minnesota')">MNU</xsl:when>
 															<xsl:when test="contains(notification_data/partner_name, 'Minitex')">MII</xsl:when>
+															<xsl:when test="contains(notification_data/partner_name, 'DPI-Minitex')">MII</xsl:when>
 														</xsl:choose>
 														</div>
 
